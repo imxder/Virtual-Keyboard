@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cadastrar</title>
+    <link rel="stylesheet" href="../static/home.css">
+</head>
+
+<body>
+
+    <div id="form_background">
+        <div class="titulo">Cadastro<div>
+        <div id="cadastro">
+
+            <form action="/cadastrarUsuario" id ="login" method="post">
+
+                <div class="form-space">
+                    <label class="login-labels" for="user">Usuário</label>
+                    <input type="text" name="user" id="user" required placeholder="Digite seu usuário">
+                </div>
+                
+                <div class="form-space">
+                    <label class="login-labels" for="senha" id="senha">Senha</label>
+                    <input type="password" name="senha" id="senha" required placeholder="Use o teclado virtual para inserir sua senha!">
+                </div>
+
+                <button class="my-button" type="submit" id="btn_login">OK!</button>
+            </form>
+
+        </div>
+    </div>
+    
+</body>
+</html>

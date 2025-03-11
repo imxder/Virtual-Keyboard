@@ -1,0 +1,135 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+:root {
+    --bankgreen: #33b864;
+}
+
+* {
+    font-family:"JetBrains Mono";
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    color: rgb(34, 34, 34);
+}
+
+body{
+    background: rgb(255, 255, 255);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    cursor: url('../Cursores/3b4771f0add5471b844df257e674bf226XDXLaaerh3fSxb9-4.png'), auto;
+}
+.custom-cursor {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+
+.site-wide {
+    width: 15px;
+    height: 15px;
+    background-image: url('../Cursores/3b4771f0add5471b844df257e674bf226XDXLaaerh3fSxb9-4.png');
+}
+
+
+.form-div {
+    margin: auto;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 40px;
+}
+
+.form-space {
+    width: 100%;
+    text-align: left;
+}
+
+.titulo {
+    font-size: 30px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+.login-labels {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 20px;
+    width: 80px;
+    display: inline-block;
+    margin-right: 30px;
+}
+
+input{
+    
+    font-size: 20px;
+    border-style: none;
+    border-bottom: 1px solid var(--bankgreen);
+}
+
+::placeholder {
+    font-size: 10px;
+}
+
+input:focus{
+    background-color: #33b86470;
+    color: grey;
+    outline: none;
+
+    transition: 0.3s;
+}
+
+.keyboard{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.delete{
+    font-size: 1rem;
+    width: 150px;
+}
+
+.buttons-div {
+    margin-top: 16px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+}
+
+.my-button{
+    border: none;
+    font-size: 15px;
+    background-color: var(--bankgreen);
+    display: inline-block;
+    padding: .5rem 1rem;
+    margin: .3rem;
+    color: white;
+    
+    height: 40px;
+    width: 130px;
+
+
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: white;
+    color: var(--bankgreen);
+    transition: 0.3s;
+    border: 3px solid var(--bankgreen);
+
+}
+
