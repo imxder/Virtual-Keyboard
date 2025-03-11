@@ -1,14 +1,12 @@
 import mysql.connector
 import datetime as datetime
 
-
-
 class Servidor:
     def __init__(self):
         self.pool = mysql.connector.pooling.MySQLConnectionPool(
             host="localhost",
             user="root",
-            password="231002",
+            password="",
             database="users",
             pool_size=32,
         )
