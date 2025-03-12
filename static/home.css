@@ -19,21 +19,9 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
-    cursor: url('../Cursores/3b4771f0add5471b844df257e674bf226XDXLaaerh3fSxb9-4.png'), auto;
+   
 }
 
-.custom-cursor {
-    position: absolute;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-}
-
-.site-wide {
-    width: 15px;
-    height: 15px;
-    background-image: url('../Cursores/3b4771f0add5471b844df257e674bf226XDXLaaerh3fSxb9-4.png');
-}
 
 #form {
     width: 100%;
@@ -100,9 +88,10 @@ button:hover {
 
 .keyboard {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 colunas para os números */
+    grid-template-columns: repeat(3, 1fr); 
     gap: 10px;
     margin-bottom: 20px;
+    grid-template-rows: repeat(2, 50px); 
 }
 
 .row {
@@ -112,18 +101,18 @@ button:hover {
 }
 
 button.btn {
-    width: 70px;  /* Aumentei a largura do botão */
-    height: 50px; /* Mantive a altura */
+    width: 90px; 
+    height: 50px; 
     background-color: var(--bankgreen);
     border-radius: 5px;
     color: white;
     font-size: 20px;
     cursor: pointer;
     border: none;
-    display: flex;            /* Alinha o conteúdo dentro do botão */
-    justify-content: center; /* Alinha o texto na horizontal */
-    align-items: center;     /* Alinha o texto na vertical */
-    white-space: nowrap;     /* Garante que o texto não quebre */
+    display: flex;            
+    justify-content: center; 
+    align-items: center;     
+    white-space: nowrap;     
     transition: 0.3s;
 }
 
@@ -134,7 +123,7 @@ button.btn:hover {
 }
 
 .delete {
-    width: 150px;
+    width: 90px;
     height: 50px;
     background-color: var(--bankgreen);
     color: white;
@@ -143,10 +132,9 @@ button.btn:hover {
     cursor: pointer;
     border: none;
     transition: 0.3s;
-    grid-column: span 3; /* Faz o botão de delete ocupar a largura de toda a linha */
-    display: flex;            /* Alinha o conteúdo dentro do botão */
-    justify-content: center;  /* Alinha o texto na horizontal */
-    align-items: center;      /* Alinha o texto na vertical */
+    display: flex;           
+    justify-content: center;  
+    align-items: center;      
 }
 
 .delete:hover {

@@ -12,7 +12,7 @@
 <body>
     <div id="form">
         <div id="titulo">
-            Login
+            LOGIN
         </div>
             <form action="/login" id ="login" method="post">
                 <label for="user">Usuário</label>
@@ -23,25 +23,13 @@
             </form>
         <div class = "container">
             <div class="keyboard">
-                    <!-- <div class="row">
-                        <button class = "btn">1</button>
-                        <button class = "btn">2</button>
-                        <button class = "btn">3</button>
-                        
-                    </div>
-                    <div class="row">
-                        <button class = "btn">4</button>
-                        <button class = "btn">5</button>
-                        <button class = "delete">Delete</button></div> -->
+                    
                 {% for i in range(0, sequencia|length, 2) %}
                     <div class="row">
                         <button class="btn" data-primeiro="{{ sequencia[i] }}" data-segundo = "{{ sequencia[i+1] }}">{{ sequencia[i] }} ou {{ sequencia[i+1] }}</button>
-                                    <!-- {% if i+2 < sequencia|length %}
-                                     <button class="btn" data-primeiro="{{ sequencia[i+2] }}" data-segundo="{{ sequencia[i+3] }}">{{ sequencia[i+2] }}{{ sequencia[i+3] }}</button> -->
-                                    <!-- {% endif %} -->
                     </div>
                 {% endfor %}
-                <button class = "delete">Delete</button>
+                <button class = "delete">DELETE</button>
             </div>
                             
         </div>
