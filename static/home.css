@@ -144,12 +144,7 @@ button.btn:hover {
     border: 3px solid var(--bankgreen);
 }
 
-.titulo {
-    text-align: center;
-    font-size: 28px;
-    font-weight: bold;
-   
-}
+
 
 .cadastrar{
     text-align: center;
