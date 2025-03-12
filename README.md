@@ -89,8 +89,8 @@ Antes de rodar o projeto, você precisa ter os seguintes itens instalados:
     ALTER TABLE usuario ADD UNIQUE (user);
     ```
 
-    - Crie um usuario na banco como teste:
-    - 
+    - Crie um usuario n0 banco como teste:
+     
     ```sql
     insert into usuario values(default, 'user', '1234');
     ```
