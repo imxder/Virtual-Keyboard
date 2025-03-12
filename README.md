@@ -89,7 +89,7 @@ Antes de rodar o projeto, você precisa ter os seguintes itens instalados:
     ALTER TABLE usuario ADD UNIQUE (user);
     ```
 
-    - Crie um usuario n0 banco como teste:
+    - Crie um usuario no banco como teste:
      
     ```sql
     insert into usuario values(default, 'user', '1234');
@@ -105,7 +105,7 @@ Antes de rodar o projeto, você precisa ter os seguintes itens instalados:
     ultima_vez_usado DATETIME NOT NULL
     );
     ```
-    - Altera a coluna `orderm` em sessoes:
+    - Altere a coluna `orderm` em sessoes:
       
     ```sql
     ALTER TABLE sessoes MODIFY ordem VARCHAR(10);
@@ -116,7 +116,7 @@ Antes de rodar o projeto, você precisa ter os seguintes itens instalados:
 
 6. Execute o arquivo `app.py` para subir a API FLASK.
 
-   - A aplicação estará acessível em `http://localhost:3308`. 
+- A aplicação estará acessível em `http://localhost:3308`. 
 
 ### Front-End
 
