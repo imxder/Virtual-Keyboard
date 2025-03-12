@@ -3,6 +3,7 @@
 
 :root {
     --bankgreen: #33b864;
+    
 }
 
 * {
@@ -143,13 +144,21 @@ button.btn:hover {
     border: 3px solid var(--bankgreen);
 }
 
-#cadastro {
+.titulo {
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+   
+}
+
+.cadastrar{
     text-align: center;
 }
 
 #cadastro h2 {
     margin-top: 20px;
     font-size: 22px;
+    text-align: center;
 }
 
 .cadastrar {

@@ -6,21 +6,19 @@ class Servidor:
         self.pool = mysql.connector.pooling.MySQLConnectionPool(
             host="localhost",
             user="root",
-            password="231002",
+            password="",
             database="users",
-            pool_size=10,  # Reduzido para evitar "Too many connections"
+            pool_size=10,  
         )
 
-    def conecta(self):
-        """Obtém uma conexão do pool"""
+    def conecta(self):   
         try:
             return self.pool.get_connection()
         except Exception as e:
             print(f"Erro ao conectar ao banco de dados: {e}")
             return None
 
-    def buscarDados(self, tabela, coluna="*", condicao=None):
-        """Busca múltiplos registros"""
+    def buscarDados(self, tabela, coluna="*", condicao=None): 
         try:
             with self.conecta() as mydb:
                 with mydb.cursor() as cursor:
@@ -34,7 +32,6 @@ class Servidor:
             return []
 
     def buscarDado(self, tabela, coluna="*", condicao=None):
-        """Busca um único registro"""
         try:
             with self.conecta() as mydb:
                 with mydb.cursor() as cursor:
@@ -64,7 +61,6 @@ class Servidor:
             print(f"Erro ao executar consulta: {e}")
 
     def AtualizarRegistro(self, tabela, colunas, condicao):
-        """Atualiza um registro na tabela"""
         try:
             with self.conecta() as mydb:
                 with mydb.cursor() as cursor:
@@ -75,7 +71,6 @@ class Servidor:
             print(f"Erro ao executar atualização: {e}")
 
     def LiberarSessoes(self):
-        """Libera sessões expiradas"""
         try:
             registros = self.buscarDados(
                 "sessoes", "id",
