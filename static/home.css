@@ -18,8 +18,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
-   
+    height: 100vh; 
 }
 
 
@@ -27,9 +26,10 @@ body {
     width: 100%;
     max-width: 400px;
     padding: 40px;
-    background-color: #f7f7f7;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    
 }
 
 #titulo {
@@ -168,4 +168,8 @@ button.btn:hover {
     background-color: white;
     color: var(--bankgreen);
     border: 3px solid var(--bankgreen);
+}
+
+#pass {
+    cursor: default;
 }

@@ -4,6 +4,9 @@ const delete_btn = document.querySelector('.delete');
 
 let passwordChars = [];
 
+// Impede que o usuário digite manualmente no campo de senha
+senhaInput.setAttribute('readonly', true);
+
 
 senhaInput.addEventListener('input', () => {
     senhaInput.setAttribute('value', senhaInput.value.replace(/./g, "*"));
