@@ -1,84 +1,87 @@
 import mysql.connector
-import datetime as datetime
+import datetime
 
 class Servidor:
     def __init__(self):
         self.pool = mysql.connector.pooling.MySQLConnectionPool(
             host="localhost",
             user="root",
-            password="",
+            password="231002",
             database="users",
-            pool_size=32,
+            pool_size=10,  # Reduzido para evitar "Too many connections"
         )
-        self.cursor = None
 
     def conecta(self):
+        """Obtém uma conexão do pool"""
         try:
-            mydb = self.pool.get_connection()
-            self.cursor = mydb.cursor()
-            return mydb
-
+            return self.pool.get_connection()
         except Exception as e:
             print(f"Erro ao conectar ao banco de dados: {e}")
+            return None
 
-    def buscarDados(self, tabela, coluna = "*", condicao = None):
+    def buscarDados(self, tabela, coluna="*", condicao=None):
+        """Busca múltiplos registros"""
         try:
-            mydb = self.pool.get_connection()
-            query = f"SELECT '{coluna}' FROM '{tabela}'"
-            if condicao:
-                query += f" WHERE '{condicao}'"
-            self.cursor.execute(query)
-            linhas = self.cursor.fetchall()
-            mydb.close()
-            return(linhas)
+            with self.conecta() as mydb:
+                with mydb.cursor() as cursor:
+                    query = f"SELECT {coluna} FROM {tabela}"
+                    if condicao:
+                        query += f" WHERE {condicao}"
+                    cursor.execute(query)
+                    return cursor.fetchall()
         except Exception as e:
             print(f"Erro ao executar consulta: {e}")
-    
+            return []
 
-    def buscarDado(self, tabela, coluna=1, condicao=None):
+    def buscarDado(self, tabela, coluna="*", condicao=None):
+        """Busca um único registro"""
         try:
-            mydb = self.pool.get_connection()
-            cursor = mydb.cursor()
-            query = f"SELECT TOP 1 '{coluna}' FROM '{tabela}'"
-            if condicao:
-                query += f" WHERE '{condicao}'"
-            cursor.execute(query)
-            linhas = self.cursor.fetchall()
-            mydb.close()
-            return(linhas)
+            with self.conecta() as mydb:
+                with mydb.cursor() as cursor:
+                    query = f"SELECT {coluna} FROM {tabela}"
+                    if condicao:
+                        query += f" WHERE {condicao}"
+                    query += " LIMIT 1"
+                    cursor.execute(query)
+                    return cursor.fetchone()
         except Exception as e:
             print(f"Erro ao executar consulta: {e}")
+            return None
 
     def inserirSessoes(self, hashEntrada, ordemNumeros):
+        """Insere uma nova sessão"""
         try:
-
-            mydb = self.pool.get_connection()
-            cursor = mydb.cursor()
-            data_hora_atual = datetime.datetime.now()
-            query = f"INSERT INTO sessoes(hash, ordem, disponivel, ultima_vez_usado) VALUES (%s, %s, %s, %s)"
-            cursor.execute(query, (hashEntrada, ordemNumeros, 1, data_hora_atual))
-            mydb.commit()
-            mydb.close()
-            print("Deu certo!")
+            with self.conecta() as mydb:
+                with mydb.cursor() as cursor:
+                    query = """
+                        INSERT INTO sessoes (hash, ordem, disponivel, ultima_vez_usado)
+                        VALUES (%s, %s, %s, %s)
+                    """
+                    cursor.execute(query, (hashEntrada, ordemNumeros, 1, datetime.datetime.now()))
+                    mydb.commit()
+                    print("Sessão inserida com sucesso!")
         except Exception as e:
             print(f"Erro ao executar consulta: {e}")
 
     def AtualizarRegistro(self, tabela, colunas, condicao):
+        """Atualiza um registro na tabela"""
         try:
-            mydb = self.pool.get_connection()
-            query = f"UPDATE ´{tabela}' SET '{colunas}' WHERE '{condicao}'"
-            cursor = mydb.cursor()
-            cursor.execute(query)
-            mydb.commit()
-            mydb.close()
+            with self.conecta() as mydb:
+                with mydb.cursor() as cursor:
+                    query = f"UPDATE {tabela} SET {colunas} WHERE {condicao}"
+                    cursor.execute(query)
+                    mydb.commit()
         except Exception as e:
-            print(f"Erro ao executar consulta: {e}")
+            print(f"Erro ao executar atualização: {e}")
 
     def LiberarSessoes(self):
+        """Libera sessões expiradas"""
         try:
-            Ids = self.buscarDados("Sessoes", 'id', "disponivel = 0 and DATEADD(MINUTE, 10, ultima_vez_usado) < GETDATE()")
-            for idRetornado in Ids:
-                self.AtualizarRegistro('Sessoes', 'disponivel = 1', f"id = '{idRetornado[0]}'")
+            registros = self.buscarDados(
+                "sessoes", "id",
+                "disponivel = 0 AND TIMESTAMPDIFF(MINUTE, ultima_vez_usado, NOW()) > 10"
+            )
+            for idRetornado in registros:
+                self.AtualizarRegistro("sessoes", "disponivel = 1", f"id = {idRetornado[0]}")
         except Exception as e:
-            print(f"Erro ao executar consulta: {e}")
-
+            print(f"Erro ao liberar sessões: {e}")

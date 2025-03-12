@@ -13,7 +13,7 @@
     color: rgb(34, 34, 34);
 }
 
-body{
+body {
     background: rgb(255, 255, 255);
     display: flex;
     align-items: center;
@@ -21,6 +21,7 @@ body{
     height: 100vh;
     cursor: url('../Cursores/3b4771f0add5471b844df257e674bf226XDXLaaerh3fSxb9-4.png'), auto;
 }
+
 .custom-cursor {
     position: absolute;
     top: 0;
@@ -34,102 +35,149 @@ body{
     background-image: url('../Cursores/3b4771f0add5471b844df257e674bf226XDXLaaerh3fSxb9-4.png');
 }
 
-
-.form-div {
-    margin: auto;
-
-    display: flex;
-    flex-direction: column;
-
-    align-items: center;
-    justify-content: center;
-
-    padding: 40px;
-}
-
-.form-space {
+#form {
     width: 100%;
-    text-align: left;
+    max-width: 400px;
+    padding: 40px;
+    background-color: #f7f7f7;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.titulo {
+#titulo {
     font-size: 30px;
-    padding-top: 20px;
     padding-bottom: 20px;
     text-align: center;
 }
 
-.login-labels {
+label {
     font-size: 20px;
     font-weight: bold;
-    padding: 20px;
-    width: 80px;
-    display: inline-block;
-    margin-right: 30px;
+    margin-bottom: 10px;
+    display: block;
 }
 
-input{
-    
+input {
     font-size: 20px;
-    border-style: none;
-    border-bottom: 1px solid var(--bankgreen);
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--bankgreen);
+    border-radius: 5px;
+    margin-bottom: 20px;
 }
 
-::placeholder {
-    font-size: 10px;
-}
-
-input:focus{
+input:focus {
     background-color: #33b86470;
     color: grey;
     outline: none;
-
     transition: 0.3s;
 }
 
-.keyboard{
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.delete{
-    font-size: 1rem;
-    width: 150px;
-}
-
-.buttons-div {
-    margin-top: 16px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-}
-
-.my-button{
+button {
     border: none;
-    font-size: 15px;
     background-color: var(--bankgreen);
-    display: inline-block;
-    padding: .5rem 1rem;
-    margin: .3rem;
     color: white;
-    
-    height: 40px;
-    width: 130px;
-
-
+    padding: 25px 20px;
+    font-size: 16px;
     cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+    margin-bottom: 20px;
+    transition: 0.3s;
 }
 
 button:hover {
     background-color: white;
     color: var(--bankgreen);
-    transition: 0.3s;
     border: 3px solid var(--bankgreen);
-
 }
 
+.container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.keyboard {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 colunas para os números */
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+button.btn {
+    width: 70px;  /* Aumentei a largura do botão */
+    height: 50px; /* Mantive a altura */
+    background-color: var(--bankgreen);
+    border-radius: 5px;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    border: none;
+    display: flex;            /* Alinha o conteúdo dentro do botão */
+    justify-content: center; /* Alinha o texto na horizontal */
+    align-items: center;     /* Alinha o texto na vertical */
+    white-space: nowrap;     /* Garante que o texto não quebre */
+    transition: 0.3s;
+}
+
+button.btn:hover {
+    background-color: white;
+    color: var(--bankgreen);
+    border: 3px solid var(--bankgreen);
+}
+
+.delete {
+    width: 150px;
+    height: 50px;
+    background-color: var(--bankgreen);
+    color: white;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    transition: 0.3s;
+    grid-column: span 3; /* Faz o botão de delete ocupar a largura de toda a linha */
+    display: flex;            /* Alinha o conteúdo dentro do botão */
+    justify-content: center;  /* Alinha o texto na horizontal */
+    align-items: center;      /* Alinha o texto na vertical */
+}
+
+.delete:hover {
+    background-color: white;
+    color: var(--bankgreen);
+    border: 3px solid var(--bankgreen);
+}
+
+#cadastro {
+    text-align: center;
+}
+
+#cadastro h2 {
+    margin-top: 20px;
+    font-size: 22px;
+}
+
+.cadastrar {
+    border: none;
+    background-color: var(--bankgreen);
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s;
+    margin-top: 10px;
+}
+
+.cadastrar:hover {
+    background-color: white;
+    color: var(--bankgreen);
+    border: 3px solid var(--bankgreen);
+}

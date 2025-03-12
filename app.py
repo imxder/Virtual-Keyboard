@@ -17,21 +17,19 @@ sessoes = Sessoes()
 warnings.filterwarnings("ignore", category=UserWarning)
 
 def int_to_list(number):
+    """Converte um número para uma lista de seus dígitos"""
     if number is None or not str(number).isdigit():
         return []
     return [int(digit) for digit in str(number)]
 
 @app.route('/')
 def home():
+    """Rota principal"""
     sequencia_numeros = Sessoes().BuscarSessaoValida()
-    
-    if sequencia_numeros is None:
-        sequencia_numeros = []
-    else:
-        sequencia_numeros = int_to_list(sequencia_numeros)
-
+    sequencia_numeros = int_to_list(sequencia_numeros)
     print(sequencia_numeros)
     return render_template('login.html', sequencia=sequencia_numeros)
+
 
 @app.route('/criarSessoes', methods=['GET'])
 def CriarSessoes():

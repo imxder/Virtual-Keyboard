@@ -1,60 +1,74 @@
 import bcrypt
 import random
-import datetime as datetime
-
+import datetime
 from servidor import Servidor
+
 servidor = Servidor()
 
-class Sessoes():
+class Sessoes:
     def gerar_sequencia(self):
-        digitos_unicos = random.sample(range(10), 10)
-        return ''.join(map(str, digitos_unicos))
-    
+        """Gera uma sequência única de 10 dígitos aleatórios."""
+        return ''.join(map(str, random.sample(range(10), 10)))
 
     def GerarSessoes(self):
-        dados = [self.gerar_sequencia() for _ in range(10)]
-        for dado in dados:
-            valor_aleatorio = str(random.randint(0, 9999))
-            hash_obj = bcrypt.hashpw(valor_aleatorio.encode('utf-8'), bcrypt.gensalt(6))
-            # hash_calculado = hash_obj.decode('utf-8').hexdigest()
-            mydb = servidor.conecta()
-            mydb = servidor.inserirSessoes(hash_obj, dado)
-
-    def BuscarSessaoValida(self):
-       
+        """Gera 10 sessões e insere no banco de dados."""
         try:
-            data_atual = datetime.datetime.now()
             mydb = servidor.conecta()
-            cursor = mydb.cursor(prepared=True)
+            cursor = mydb.cursor()
 
-            query = "SELECT hash, ordem FROM sessoes WHERE disponivel = 1 ORDER BY ultima_vez_usado ASC LIMIT 1;"
-            cursor.execute(query)
+            for _ in range(10):
+                dado = self.gerar_sequencia()
+                valor_aleatorio = str(random.randint(0, 9999))
 
-            linha = cursor.fetchone()
+                # Gerando hash e convertendo para string
+                hash_obj = bcrypt.hashpw(valor_aleatorio.encode('utf-8'), bcrypt.gensalt(6))
+                hash_str = hash_obj.decode('utf-8')
 
-            if linha is not None:
-                hash_retorno  = linha[0]
-                ordem_retorno = linha[1]
-                print("O erro é aqui mesmooooo")
-                print(ordem_retorno)
-                query = "UPDATE sessoes SET disponivel = 0, ultima_vez_usado = %s WHERE hash = %s"
-                cursor.execute(query, (data_atual, hash_retorno))
-                mydb.commit()
-            else:
-                print("Nenhuma sessão disponível")
+                # Inserindo no banco
+                servidor.inserirSessoes(hash_str, dado)  # Chamando corretamente
 
             cursor.close()
             mydb.close()
-            print(ordem_retorno)
-            return ordem_retorno
+
+        except Exception as e:
+            print(f"Erro ao gerar sessões: {e}")
+
+    def BuscarSessaoValida(self):
+        """Busca a sessão mais antiga disponível e a marca como usada."""
+        try:
+            mydb = servidor.conecta()
+            cursor = mydb.cursor()
+
+            # Buscando sessão disponível mais antiga
+            query = "SELECT hash, ordem FROM sessoes WHERE disponivel = 1 ORDER BY ultima_vez_usado ASC LIMIT 1;"
+            cursor.execute(query)
+            linha = cursor.fetchone()
+
+            if linha:
+                hash_retorno, ordem_retorno = linha
+                print(f"Encontrada sessão válida: {ordem_retorno}")
+
+                # Atualizando sessão como indisponível
+                data_atual = datetime.datetime.now()
+                query = "UPDATE sessoes SET disponivel = 0, ultima_vez_usado = %s WHERE hash = %s"
+                cursor.execute(query, (data_atual, hash_retorno))
+                mydb.commit()
+
+                cursor.close()
+                mydb.close()
+                return ordem_retorno
+            else:
+                print("Nenhuma sessão disponível")
+                cursor.close()
+                mydb.close()
+                return None
 
         except Exception as e:
             print(f"Erro ao buscar sessão válida: {e}")
-
-
+            return None
 
 def executar():
     sessao = Sessoes()
     sessao.GerarSessoes()
 
-
+# executar()

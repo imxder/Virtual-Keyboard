@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -6,41 +7,50 @@
     <title>HOME</title>
     <link rel="stylesheet" href="../static/home.css">
     <script src="../static/app.js" defer></script>
-    
+
 </head>
 <body>
-
     <div id="form">
-        <div class="titulo">Login</div>
-
-        <div class="form-div">
-            <form action="/login" id="login" method="post">
-                <div class="form-space">
-                    <label for="user" class="login-labels">Usuário</label>
-                    <input type="text" name="user" required placeholder="Digite seu usuário">
-                </div>
-                <div class="form-space">
-                    <label class="login-labels">Senha</label>
-                    <input type="password" name="senha" required placeholder="Use o teclado virtual para inserir sua senha!">
-                </div>
-            </form>
+        <div id="titulo">
+            Login
         </div>
-
-        <div class="buttons-div">
-            <form action="/login" method="post">
-                <button class="my-button" type="submit" id="btn_login">ENTRAR</button>
+            <form action="/login" id ="login" method="post">
+                <label for="user">Usuário</label>
+                <input type="text" name="user" id="user" required placeholder="Digite seu usuário"><br>
+                <label for="senha" id="senha">Senha</label>
+                <input type="password" name="senha" id="pass" required placeholder="Use o teclado virtual para inserir sua senha!"><br>
+                <button class = "entrar" type="submit" id="btn_login">ENTRAR</button>
             </form>
-            <form action="/path">
-                <button id="cadastrar" class="my-button" type="submit" id="redirect">CADASTRAR</button>
-            </form>
+        <div class = "container">
+            <div class="keyboard">
+                    <!-- <div class="row">
+                        <button class = "btn">1</button>
+                        <button class = "btn">2</button>
+                        <button class = "btn">3</button>
+                        
+                    </div>
+                    <div class="row">
+                        <button class = "btn">4</button>
+                        <button class = "btn">5</button>
+                        <button class = "delete">Delete</button></div> -->
+                {% for i in range(0, sequencia|length, 2) %}
+                    <div class="row">
+                        <button class="btn" data-primeiro="{{ sequencia[i] }}" data-segundo = "{{ sequencia[i+1] }}">{{ sequencia[i] }} ou {{ sequencia[i+1] }}</button>
+                                    <!-- {% if i+2 < sequencia|length %}
+                                     <button class="btn" data-primeiro="{{ sequencia[i+2] }}" data-segundo="{{ sequencia[i+3] }}">{{ sequencia[i+2] }}{{ sequencia[i+3] }}</button> -->
+                                    <!-- {% endif %} -->
+                    </div>
+                {% endfor %}
+                <button class = "delete">Delete</button>
+            </div>
+                            
         </div>
-
-        <div class="container">
-            
-        </div>
-        
-
+            <div id="cadastro">
+                <h2>Novo aqui?</h2>
+                <form>
+                    <button class = "cadastrar" type="submit" formaction="/path" id="redirect">Cadastrar</button>
+                </form>
+            </div>
     </div>
-
 </body>
 </html>
